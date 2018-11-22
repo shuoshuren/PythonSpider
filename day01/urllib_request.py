@@ -21,12 +21,21 @@ ua_headers = {
     "User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36"
 }
 
-request = urllib.request.Request("http://www.baidu.com")
+request = urllib.request.Request("http://www.baidu.com",headers=ua_headers)
 
 # 向指定的URL地址发送请求，返回服务器响应的类文件对象
-response = urllib.request.urlopen(request,headers=ua_headers)
+response = urllib.request.urlopen(request)
 
 # read（）方法就是读取文件的全部内容，返回字符串
 html = response.read()
 
-print(html)
+# 返回http响应码
+code = response.getcode()
+
+# 返回实际的URL地址，防止重定向
+url = response.geturl()
+
+# 服务器响应的HTTP包头
+info = response.info()
+
+print(info)
