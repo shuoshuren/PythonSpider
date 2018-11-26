@@ -21,7 +21,14 @@ ua_headers = {
     "User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36"
 }
 
-request = urllib.request.Request("http://www.baidu.com",headers=ua_headers)
+url = "http://www.baidu.com"
+
+user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36"
+
+request = urllib.request.Request(url,headers=ua_headers)
+
+# 添加/修改一个HTTP 报头
+request.add_header("User-Agent",user_agent)
 
 # 向指定的URL地址发送请求，返回服务器响应的类文件对象
 response = urllib.request.urlopen(request)
@@ -38,4 +45,4 @@ url = response.geturl()
 # 服务器响应的HTTP包头
 info = response.info()
 
-print(info)
+print(request.get_header("User-agent"))
